@@ -1,14 +1,33 @@
 const baseUrl="https://sauna-ikitai.com/"
+const worker = new Worker("worker.js")
+const resultWorker = {}
+const lastUID = Math.floor(Math.random() * 10000) * 10000;
 
-
-async function rest(pathAndParams) {
-  const res = await fetch(baseUrl + pathAndParams, { mode: "no-cors" })
-  const text = await res.text()
-  console.log(text)
+worker.onmessage = (e) => {
+  const [ reqId, text ] = e.data;
   const iframe = document.createElement("iframe")
   document.body.appendChild(iframe)
   iframe.contentDocument.write(text)
-  return iframe.contentDocument
+  resultWorker[reqId] = iframe
+};
+
+async function rest(pathAndParams) {
+  const reqId = lastUID++
+  worker.postMessage([ reqId, pathAndParams ])
+
+  const iframe = await new Promise((resolve, reject) => {
+    const iid = setInterval(function () {
+      const iframe = resultWorker[reqId]
+      if (iframe) {
+        clearInterval(iid)
+        delete resultWorker[reqId]
+        resolve(iframe)
+      }
+    }, 100)
+  })
+  const doc = iframe.contentDocument
+  document.body.removeChild(iframe)
+  return doc
 }
 
 function alert(clazz, message) {
@@ -29,7 +48,7 @@ function error(message) {
 
 
 async function getMyId() {
-  const doc = rest("");
+  const doc = await rest("");
   const a = doc.querySelector(".p-menuUser_myPage > a")
   if (!a) {
     return { failed: true }
@@ -50,7 +69,7 @@ async function initMain() {
   var div = document.createElement("div")
   div.className = "profile"
   div.appendChild(iconTag)
-  var nameDiv = document.createElement("div");
+  var nameDiv = document.createElement("div")
   nameDiv.className = "p-menuUser_name"
   nameDiv.innerText = id + " " + name
   div.appendChild(nameDiv)
