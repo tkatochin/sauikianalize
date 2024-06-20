@@ -12,7 +12,7 @@ async function rest(pathAndParams) {
 }
 
 function alert(clazz, message) {
-  const error = document.querySelector(clazz".alert-error")
+  const error = document.querySelector(clazz)
   error.style.display = "block"
   setTimeout(function() {
     error.style.display = "none"
