@@ -2,7 +2,7 @@ const baseUrl="https://sauna-ikitai.com/"
 
 
 async function rest(pathAndParams) {
-  const res = await fetch(baseUrl + pathAndParams, { mode: "cors" })
+  const res = await fetch(baseUrl + pathAndParams, { mode: "no-cors" })
   const text = await res.text()
   console.log(text)
   const iframe = document.createElement("iframe")
