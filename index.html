@@ -10,10 +10,10 @@
     <!--
     (function(){
       var regex = /iphone;|(android|nokia|blackberry|bb10;).+mobile|android.+fennec|opera.+mobi|windows phone|symbianos/i;
-      var isMobileByUa = regex.test(navigator.userAgent);;
+      var isMobileByUa = regex.test(navigator.userAgent);
       var isMobileByClientHint = navigator.userAgentData && navigator.userAgentData.mobile;
       return isMobileByClientHint || isMobileByUa;
-    })()?document.body.id = "mobile"
+    })()?document.body.id = "mobile": document.body.id = "pc";
     -->
   </script>
   <div class="header">サウイキアナライズ</div>
