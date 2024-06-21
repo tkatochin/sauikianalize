@@ -1,4 +1,3 @@
-const baseUrl="https://sauna-ikitai.com/"
 const worker = new Worker("worker.js")
 const resultWorker = {}
 let lastUID = Math.floor(Math.random() * 10000) * 10000;
