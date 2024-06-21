@@ -1,7 +1,7 @@
 const baseUrl="https://sauna-ikitai.com/"
 const worker = new Worker("worker.js")
 const resultWorker = {}
-const lastUID = Math.floor(Math.random() * 10000) * 10000;
+let lastUID = Math.floor(Math.random() * 10000) * 10000;
 
 worker.onmessage = (e) => {
   const [ reqId, text ] = e.data;
