@@ -1,3 +1,5 @@
+const baseUrl="https://sauna-ikitai.com/"
+
 onmessage = async function (e) {
   const [ uid, pathAndParams ] = e.data
   const text = await rest(pathAndParams)
