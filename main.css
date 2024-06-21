@@ -1,8 +1,8 @@
 /* デフォルトのフォントと色 */
 body {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-  color: #333;
-  background-color: #fff;
+  color: #f8f8f8;
+  background-color: #0051e0;
 }
 
 body#mobile {
@@ -19,7 +19,7 @@ body#mobile {
   border-radius: 6px;
   border: 1px solid #007aff;
   color: #007aff;
-  background-color: transparent;
+  background-color: #f0f0f0;
   cursor: pointer;
 }
 
